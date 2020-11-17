@@ -32,7 +32,7 @@ public class StudentEnrollmentSummaryServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         //ID od sesija
-        String courseId = (String)request.getSession().getAttribute("courseId");
+        String courseId = request.getSession().getAttribute("courseId").toString();
         context.setVariable("courseId",courseId);
 
         //Course od findById

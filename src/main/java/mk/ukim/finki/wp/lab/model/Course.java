@@ -3,6 +3,8 @@ package mk.ukim.finki.wp.lab.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,12 @@ import java.util.List;
 public class Course {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
     private String name;
     private String description;
     private List<Student> studentsInCourse;
+    private Teacher teacher;
 
     public Course(Long courseId,String name, String description){
         this.courseId = courseId;

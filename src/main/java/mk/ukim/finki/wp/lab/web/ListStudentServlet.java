@@ -35,7 +35,7 @@ public class ListStudentServlet extends HttpServlet {
 
         session.setAttribute("username",studentUser);
         Student student = studentService.findByUsername(studentUser);
-        String courseId = (String) session.getAttribute("courseId");
+        String courseId = session.getAttribute("courseId").toString();
 
         courseService.addStudentInCourse(student.getUsername(),Long.parseLong(courseId));
         response.sendRedirect("/StudentEnrollmentSummary");
@@ -45,7 +45,7 @@ public class ListStudentServlet extends HttpServlet {
         WebContext context = new WebContext(request,response,request.getServletContext());
         response.setContentType("text/html;charset=UTF-8");
         context.setVariable("students",studentService.listAll());
-        String courseId = (String)request.getSession().getAttribute("courseId");
+        String courseId = request.getSession().getAttribute("courseId").toString();
         context.setVariable("courseId",courseId);
         this.springTemplateEngine.process("listStudents.html",context,response.getWriter());
 
