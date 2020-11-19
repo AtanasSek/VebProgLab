@@ -24,4 +24,11 @@ public class TeacherRepository {
         return teacherList;
     }
 
+    public Teacher findById(Long id) {
+        for (Teacher teacher : teacherList) {
+            if(teacher.getId().equals(id))
+                return teacher;
+        }
+        return null;
+    }
 }

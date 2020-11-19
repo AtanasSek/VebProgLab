@@ -1,25 +1,26 @@
 package mk.ukim.finki.wp.lab.web.controller;
 
+import mk.ukim.finki.wp.lab.model.Course;
+import mk.ukim.finki.wp.lab.model.Teacher;
 import mk.ukim.finki.wp.lab.service.CourseService;
+import mk.ukim.finki.wp.lab.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpRequest;
 
 @Controller
 @RequestMapping("/courses")
 public class CourseController {
 
     private final CourseService courseService;
+    private final TeacherService teacherService;
 
-    public CourseController(CourseService courseService) {
+    public CourseController(CourseService courseService, TeacherService teacherService) {
         this.courseService = courseService;
+        this.teacherService = teacherService;
     }
 
     @GetMapping
@@ -35,8 +36,18 @@ public class CourseController {
         return "redirect:/AddStudent";
     }
 
-    @GetMapping("/add")
-    public String saveCourse(){
-        return "a";
+    @PostMapping("/add")
+    public String saveCourse(@RequestParam String name , @RequestParam String description , @RequestParam Long id){
+        //Go smestuvam vo objekt namesto direktno da go pratam vo funkcijata poradi citlivost
+        Teacher teacher = teacherService.findById(id);
+        courseService.addCourse(new Course(name,description,teacher));
+        return "redirect:/courses";
+    }
+
+    //TODO: vrakja 405 method GET not supported. HTML ne podrzuva delete metoda, mora so ajax povik ili nesto slicno
+    @DeleteMapping("/delete/{id}")
+    public String deleteCourse(@PathVariable Long id){
+        courseService.deleteCourse(id);
+        return "redirect:/courses";
     }
 }

@@ -24,6 +24,7 @@
         <ul style="list-style-type:none">
             <li th:each="course : ${courses}">
                 <input type="radio" th:name="courseId" th:value="${course.getCourseId()}" required/> <label th:text="${course.getName()}"></label>
+                <a th:href="@{/courses/delete/{id}(id=${course.getCourseId()})}">Delete Course</a>
             </li>
         </ul>
 

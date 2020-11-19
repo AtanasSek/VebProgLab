@@ -37,4 +37,14 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findById(courseId);
     }
 
+    @Override
+    public void addCourse(Course course) {
+        courseRepository.addCourse(course);
+    }
+
+    @Override
+    public void deleteCourse(Long id) {
+        courseRepository.delete(id);
+    }
+
 }

@@ -51,7 +51,12 @@ public class CourseRepository {
         return course;
     }
 
+    public void addCourse(Course course){
+        courses.add(course);
+    }
 
 
-
+    public void delete(Long id) {
+        courses.remove(findById(id));
+    }
 }
