@@ -13,11 +13,11 @@ public class TeacherRepository {
 
     public TeacherRepository(){
 
-        teacherList.add(new Teacher("Professor","Professorski"));
-        teacherList.add(new Teacher("Teacher","Teacherski"));
-        teacherList.add(new Teacher("Generic","Genericski"));
-        teacherList.add(new Teacher("Default","Defaultski"));
-        teacherList.add(new Teacher("Placeholder","Placeholderski"));
+        teacherList.add(new Teacher(1L,"Professor","Professorski"));
+        teacherList.add(new Teacher(2L,"Teacher","Teacherski"));
+        teacherList.add(new Teacher(3L,"Generic","Genericski"));
+        teacherList.add(new Teacher(4L,"Default","Defaultski"));
+        teacherList.add(new Teacher(5L,"Placeholder","Placeholderski"));
     }
 
     public List<Teacher> findAll(){

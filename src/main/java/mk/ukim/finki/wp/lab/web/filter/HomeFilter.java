@@ -20,7 +20,12 @@ public class HomeFilter implements Filter {
         Long courseId = (Long)request.getSession().getAttribute("courseId");
         System.out.println("Filter Debug ,COURSEID:" + courseId);
 
-        if(courseId == null && !request.getServletPath().equals("/courses")){
+        if(courseId == null
+                && !request.getServletPath().equals("/courses")
+                && !request.getServletPath().equals("/courses/add")
+                && !request.getServletPath().contains("/courses/delete")
+                && !request.getServletPath().contains("/courses/edit")){
+
             response.sendRedirect("/courses");
         }
         else {

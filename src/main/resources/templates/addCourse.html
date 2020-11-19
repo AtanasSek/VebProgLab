@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    <label>Course name:</label><input type="text" name="name" th:value="${courseName}"> <br>
+    <label>Course description:</label><input type="text" name="description" th:value="${courseDescription}"> <br>
+    <select name="id">
+        <option th:each="teacher:${teacherList}" th:value="${teacher.getId()}" th:text="${teacher.getName() + ' ' + teacher.getSurname()}"></option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

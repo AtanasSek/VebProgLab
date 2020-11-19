@@ -47,4 +47,9 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.delete(id);
     }
 
+    @Override
+    public void editCourse(Course course) {
+        courseRepository.edit(course);
+    }
+
 }

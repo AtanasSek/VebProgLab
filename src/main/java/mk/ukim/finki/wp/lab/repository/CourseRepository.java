@@ -59,4 +59,13 @@ public class CourseRepository {
     public void delete(Long id) {
         courses.remove(findById(id));
     }
+
+    public void edit(Course course) {
+        for (Course c:courses) {
+            if(c.getCourseId().equals(course.getCourseId())){
+                courses.set(courses.indexOf(c),course);
+            }
+        }
+        System.out.println(course);
+    }
 }
