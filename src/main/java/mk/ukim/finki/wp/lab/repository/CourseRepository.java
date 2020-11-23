@@ -68,4 +68,13 @@ public class CourseRepository {
         }
         System.out.println(course);
     }
+
+    public Boolean checkIfCourseExists(String name) {
+        for(Course course: courses){
+            if(name.equals(course.getName())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

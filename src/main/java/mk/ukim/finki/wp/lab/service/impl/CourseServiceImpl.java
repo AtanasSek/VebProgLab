@@ -52,4 +52,9 @@ public class CourseServiceImpl implements CourseService {
         courseRepository.edit(course);
     }
 
+    @Override
+    public Boolean checkIfCourseExists(String name) {
+        return courseRepository.checkIfCourseExists(name);
+    }
+
 }

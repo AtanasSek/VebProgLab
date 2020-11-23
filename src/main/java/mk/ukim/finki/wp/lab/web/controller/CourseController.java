@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Comparator;
+import java.util.List;
 
 @Controller
 @RequestMapping("/courses")
@@ -25,7 +27,10 @@ public class CourseController {
 
     @GetMapping
     public String getCoursesPage(@RequestParam(required = false) String error, Model model){
+        List<Course> courseList = courseService.listAll();
+        courseList.sort(Comparator.comparing(Course::getName));
         model.addAttribute("courses",courseService.listAll());
+
         return "listCourses.html";
     }
 
@@ -36,13 +41,15 @@ public class CourseController {
         return "redirect:/AddStudent";
     }
 
-
-
-    //TODO: vrakja 405 method GET not supported. HTML ne podrzuva delete metoda, mora so ajax povik ili nesto slicno
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String deleteCourse(@PathVariable Long id){
         courseService.deleteCourse(id);
         return "redirect:/courses";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String getDeleteForm(){
+        return "deleteCourse.html";
     }
 
     @GetMapping("/add")
@@ -54,8 +61,13 @@ public class CourseController {
     @PostMapping("/add")
     public String saveCourse(@RequestParam String name , @RequestParam String description , @RequestParam Long id){
         //Go smestuvam vo objekt namesto direktno da go pratam vo funkcijata poradi citlivost
+        if(courseService.checkIfCourseExists(name.trim()))
+            return "redirect:/courses";
         Teacher teacher = teacherService.findById(id);
-        courseService.addCourse(new Course(name,description,teacher));
+        Course course = new Course(name,description,teacher);
+        teacherService.findById(id).getCourses().add(course);
+        System.out.println(teacherService.findById(id).getCourses());
+        courseService.addCourse(course);
         return "redirect:/courses";
     }
 
@@ -69,7 +81,7 @@ public class CourseController {
     }
 
     @PostMapping("/edit/{courseId}")
-    public String editCourse(@RequestParam String name, @RequestParam String description, @RequestParam Long id, @PathVariable Long courseId, Model model){
+    public String editCourse(@RequestParam String name, @RequestParam String description, @RequestParam Long id, @PathVariable Long courseId){
         Course course = new Course(courseId,name,description);
         course.setTeacher(teacherService.findById(id));
         courseService.editCourse(course);

@@ -16,4 +16,6 @@ public interface CourseService {
     void deleteCourse(Long id);
 
     void editCourse(Course course);
+
+    Boolean checkIfCourseExists(String name);
 }

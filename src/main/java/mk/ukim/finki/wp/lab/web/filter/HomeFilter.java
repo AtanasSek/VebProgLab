@@ -24,7 +24,8 @@ public class HomeFilter implements Filter {
                 && !request.getServletPath().equals("/courses")
                 && !request.getServletPath().equals("/courses/add")
                 && !request.getServletPath().contains("/courses/delete")
-                && !request.getServletPath().contains("/courses/edit")){
+                && !request.getServletPath().contains("/courses/edit")
+                && !request.getServletPath().contains("/teachers")) {
 
             response.sendRedirect("/courses");
         }

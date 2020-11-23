@@ -1,6 +1,8 @@
 package mk.ukim.finki.wp.lab.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import mk.ukim.finki.wp.lab.service.TeacherService;
 import org.springframework.data.annotation.Id;
 
@@ -9,7 +11,8 @@ import javax.persistence.GenerationType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class Course {
 
     @Id
