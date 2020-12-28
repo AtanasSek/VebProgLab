@@ -7,6 +7,7 @@ import mk.ukim.finki.wp.lab.service.TeacherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class CourseController {
     public String RdrctToAddStudent(@RequestParam(required = true) Long courseId, HttpServletRequest request){
         HttpSession session = request.getSession();
         session.setAttribute("courseId",courseId);
-        return "redirect:/AddStudent";
+        return "redirect:/courses/AddStudent";
     }
 
     @PostMapping("/delete/{id}")
@@ -69,6 +70,17 @@ public class CourseController {
         System.out.println(teacherService.findById(id).getCourses());
         courseService.addCourse(course);
         return "redirect:/courses";
+    }
+
+    @GetMapping("/StudentEnrollmentSummary")
+    public String ShowEnrollmentSummary(HttpServletRequest request, Model model){
+        String courseId = request.getSession().getAttribute("courseId").toString();
+        model.addAttribute("courseId",courseId);
+
+        //Course od findById
+        Course course = courseService.findById(Long.parseLong(courseId));
+        model.addAttribute("course",course);
+        return "studentsInCourse.html";
     }
 
     @GetMapping("/edit/{id}")

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "CoursesListServlet",urlPatterns = "/listCourses")
+//@WebServlet(name = "CoursesListServlet",urlPatterns = "/listCourses")
 public class CoursesListServlet extends HttpServlet {
 
     private final CourseService courseService;

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(name = "ListStudentServlet",urlPatterns = "/AddStudent")
+//@WebServlet(name = "ListStudentServlet",urlPatterns = "/AddStudent")
 public class ListStudentServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;

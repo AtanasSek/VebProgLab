@@ -11,7 +11,7 @@
 <section>
     <div th:text="${course.getName()}"></div>
     <ul style="list-style-type:none">
-        <li th:each="student:${course.getStudentsInCourse()}" th:text="${student.getName() + ' (' + student.getUsername() + ')'}">
+        <li th:each="student:${course.getStudentsInCourse()}" th:text="${student.getName() + ' (' + student.getUsername() + ')' + 'Grade: ' + student.getGrades(course.getName())}">
 
         </li>
 

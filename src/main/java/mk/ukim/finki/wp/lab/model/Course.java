@@ -1,29 +1,36 @@
 package mk.ukim.finki.wp.lab.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import mk.ukim.finki.wp.lab.service.TeacherService;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@Entity
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseId;
+
     private String name;
     private String description;
+
+    @ManyToMany
     private List<Student> studentsInCourse;
+
+    @ManyToOne
     private Teacher teacher;
 
+    @OneToMany
+    private List<Grade> grades;
 
+    private Type type;
+
+    public Course(){}
 
     public Course(Long courseId,String name, String description){
         this.courseId = courseId;
